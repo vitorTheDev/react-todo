@@ -1,20 +1,16 @@
 import { useState } from 'react';
 import { TodoItemModel } from './todo-item-model';
 import TodoItem from './todo-item';
+import TodoForm from './todo-form';
 
 export const TODOS_STORAGE_KEY = 'REACT_TODOS'
 
 function TodoList() {
 
-  const [todos, setTodos] = useState((JSON.parse(localStorage.getKey(TODOS_STORAGE_KEY)) ?? []) as TodoItemModel[])
+  const [todos, setTodos] = useState((JSON.parse(localStorage.getItem(TODOS_STORAGE_KEY) ?? 'null') ?? []) as TodoItemModel[])
 
   const addTodo = (todo: TodoItemModel) => {
     setTodos([...todos, todo])
-    updateStorage()
-  }
-
-  const updateTodo = (todo: TodoItemModel) => {
-    setTodos([...todos.filter(v => v.id !== todo.id), todo])
     updateStorage()
   }
 
@@ -24,12 +20,13 @@ function TodoList() {
   }
 
   const updateStorage = () => {
-    localStorage.setKey(TODOS_STORAGE_KEY, JSON.stringify(todos))
+    localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos))
   }
 
   return (<>
+    <TodoForm onAdd={addTodo}></TodoForm>
     <ul>
-      {todos.map(todo => (<TodoItem></TodoItem>))}
+      {todos.map(todo => (<TodoItem item={todo} onDelete={deleteTodo}></TodoItem>))}
     </ul>
   </>)
 }

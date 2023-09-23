@@ -1,10 +1,11 @@
 import { TodoItemModel } from './todo-item-model';
 
-function TodoItem() {
+function TodoItem({ item, onDelete }: { item: TodoItemModel, onDelete: (todo: TodoItemModel) => void, }) {
 
   return (<li>
-      a
-    </li>)
+    {item.description}
+    <button onClick={() => onDelete(item)}>X</button>
+  </li>)
 }
 
-export default TodoItemModel
+export default TodoItem
