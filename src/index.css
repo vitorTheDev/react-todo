@@ -21,12 +21,16 @@
 body {
   min-width: 100dvw !important;
   min-height: 100dvh !important;
+  width: 100dvw !important;
+  height: 100dvh !important;
   margin: 0px;
   padding: 0px;
 }
 #root {
   min-width: 100dvw !important;
   min-height: 100dvh !important;
+  width: 100dvw !important;
+  height: 100dvh !important;
   margin: 0px;
   padding: 0px;
 }
