@@ -8,13 +8,15 @@ function TodoForm({ onAdd }: { onAdd: (todo: TodoItemModel) => void}) {
   }
   const handleSubmit = (e: any) => {
     e?.preventDefault();
-    onAdd?.({description})
+    if (description) {
+      onAdd?.({description})
+    }
   }
 
   return (<form onSubmit={handleSubmit}>
-    <div>
-      <input onChange={descriptionChanged}></input>
-      <button type="submit">Adicionar</button>
+    <div className="min-w-[15rem] flex flex-row justify-between gap-3 m-2">
+      <input className="border-2 rounded-md" onChange={descriptionChanged}></input>
+      <button className="p-1 shadow-md active:shadow-lg border-2 rounded-md" type="submit">Adicionar</button>
     </div>
   </form>)
 }
