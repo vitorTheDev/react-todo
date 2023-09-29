@@ -11,7 +11,7 @@ const createDb = async () => {
     await db.use({ ns: "reactTodo", db: "reactTodo" });
     return db;
   } catch (e) {
-    console.error("ERROR", e);
+    console.error("DB ERROR", e);
   }
 }
 

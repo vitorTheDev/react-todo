@@ -10,7 +10,6 @@ function TodoList() {
   useEffect(() => {
     (async () => {
       const db = await surrealDb();
-      (window as any).db = db
       const todosData = await db?.select('todo') as TodoItemModel[]
       if (todosData) {
         setTodos(todosData)
