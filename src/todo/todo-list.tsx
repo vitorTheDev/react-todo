@@ -4,8 +4,6 @@ import TodoItem from './todo-item';
 import TodoForm from './todo-form';
 import { surrealDb } from '../db/db';
 
-export const TODOS_STORAGE_KEY = 'REACT_TODOS'
-
 function TodoList() {
   useEffect(() => {
     (async () => {
