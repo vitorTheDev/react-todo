@@ -8,7 +8,7 @@ function TodoForm({ onAdd }: { onAdd: (todo: TodoItemModel) => void}) {
   }
   const handleSubmit = (e: any) => {
     e?.preventDefault();
-    onAdd?.({id: crypto.randomUUID(), description})
+    onAdd?.({description})
   }
 
   return (<form onSubmit={handleSubmit}>

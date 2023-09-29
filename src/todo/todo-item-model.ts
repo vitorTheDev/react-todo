@@ -1,4 +1,4 @@
 export interface TodoItemModel {
-  id: string;
+  id?: string;
   description: string;
 }
