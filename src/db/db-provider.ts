@@ -1,8 +1,13 @@
+import { createContext, useContext } from "react"
+import Surreal from "surrealdb.wasm"
 
-import { Surreal } from 'surrealdb.wasm';
+const DbContext = createContext(new Surreal());
 
-const createDb = async () => {
-  const db = new Surreal();
+export const useDb = () => {
+  return useContext(DbContext);
+};
+
+export const connectDb = async (db: Surreal) => {
   try {
     // Connect to the database
     await db.connect('indxdb://reactTodo', {});
@@ -13,13 +18,4 @@ const createDb = async () => {
   } catch (e) {
     console.error("DB ERROR", e);
   }
-}
-
-let _db: Surreal | undefined;
-
-export const surrealDb = async () => {
-  if (!_db) {
-    _db = await createDb()
-  }
-  return _db
 }

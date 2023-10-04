@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react';
 import { TodoItemModel } from './todo-item-model';
 import TodoItem from './todo-item';
 import TodoForm from './todo-form';
-import { surrealDb } from '../db/db';
+import { connectDb, useDb } from '../db/db-provider';
 
 function TodoList() {
+  const db = useDb()
+  const [todos, setTodos] = useState([] as TodoItemModel[])
+
   useEffect(() => {
     (async () => {
-      const db = await surrealDb();
+      console.log('connect')
+      await connectDb(db)
       const todosData = await db?.select('todo') as TodoItemModel[]
       if (todosData) {
         setTodos(todosData)
@@ -15,17 +19,13 @@ function TodoList() {
     })();
   }, [])
 
-  const [todos, setTodos] = useState([] as TodoItemModel[])
-
   const addTodo = async (todo: TodoItemModel) => {
-    const db = await surrealDb()
     const newTodo = await db?.create('todo', todo)
     setTodos([...todos, newTodo])
   }
 
   const deleteTodo = async (todo: TodoItemModel) => {
     setTodos([...todos.filter(v => v.id !== todo.id)])
-    const db = await surrealDb()
     await db?.delete(todo.id as string)
   }
 
